@@ -3,8 +3,8 @@
 
 ---
 ### UNIDAD 1
-! [Ejercicios 1 Preorden](Unidad1/Ejercicio1_Preorden.jpg)  
-! [Ejercicios 2 Preorden Parte 1](Unidad1/Ejercicio2_Preorden_Parte1.jpg) - ! [Ejercicios 2 Preorden Parte 2](Unidad1/Ejercicio2_Preorden_Parte1.jpg)    
+![Ejercicios 1 Preorden](Unidad1/Ejercicio1_Preorden.jpg)  
+![Ejercicios 2 Preorden Parte 1](Unidad1/Ejercicio2_Preorden_Parte1.jpg) - ![Ejercicios 2 Preorden Parte 2](Unidad1/Ejercicio2_Preorden_Parte1.jpg)    
 [Funciones Establecidas por Clisp](Unidad_1/Funciones_Establecidas_Clisp.md)  
 [Ejercicios Car y Cdr](Unidad_1/Funciones_Car_Cdr.md)  
 [Ejercicios If, When, Cond](Unidad_1/Ejercicios_If.md)
