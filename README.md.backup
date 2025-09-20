@@ -3,9 +3,12 @@
 
 ---
 ### UNIDAD 1
-Ejercicios 1 Preorden (Estan en archivos)  
-Ejercicios 2 Preorden Parte 1 - Ejercicios 2 Preorden Parte 2   
+Ejercicios 1 Preorden (Esta en Unidad1/Ejercicio1_Preorden)  
+Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y Ejercicio2_Preorden_Parte2)   
+[Ejercicio Descomposicion de Numero Natural](Unidad_1/Ejercicio_Descomposicion_Numero_Natural.md)  
 [Funciones Establecidas por Clisp](Unidad_1/Funciones_Establecidas_Clisp.md)  
+[Ejercicio Division por Restas y Potencia por Sumas/Multiplicacion](Unidad_1/Ejercicios_Division_Potencia.md)  
 [Ejercicios Car y Cdr](Unidad_1/Funciones_Car_Cdr.md)  
-[Ejercicios If, When, Cond](Unidad_1/Ejercicios_If.md)
+[Ejercicios If, When, Cond](Unidad_1/Ejercicios_If.md)  
+[Acertijos](Unidad_1/Acertijos.md)
 
