@@ -239,4 +239,4 @@ Definir una función que use ‘cond‘ para evaluar una lista de números y dev
     )
 )
 ~~~
-**Explicacion del Ejercicio:** Se utiliza cond para evaluar diferentes condiciones. Primero, si la lista está vacía (null lista), devuelve la lista (Vacia). Luego, si la lista tiene un solo elemento (null (cdr lista)), devuelve (Un solo elemento). En cualquier otro caso (cuando la lista tiene más de un elemento), devuelve (Larga).
+**Explicacion del Ejercicio:** 
