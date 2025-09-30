@@ -12,5 +12,6 @@ Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y 
 [Ejercicios If, When, Cond](Unidad_1/Ejercicios_If.md)  
 [Acertijos](Unidad_1/Acertijos.md)  
 [Actividad Fun_Log](Unidad_1/Actividad_Fun_Log.md)  
-[Examen Practica](Unidad_1/Examen_Practica.md)
+[Examen Practica](Unidad_1/Examen_Practica.md)  
+[Areas y Volumenes](Unidad_1/Areas_y_Volumenes.md)
 
