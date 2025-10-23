@@ -19,5 +19,8 @@ Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y 
 [Areas y Volumenes](Unidad_1/Areas_y_Volumenes.md)  
 
 ### UNIDAD 2 (Prolog)
-[Ejercicios Logica de Primer Orden](Unidad_2/Logica_Primer_Orden.md)
+[Ejercicios Logica de Primer Orden](Unidad_2/Logica_Primer_Orden.md)  
+[Evaluacion Prolog](Unidad_2/Evaluacion_Prolog.md)  
+[Ejercicios Prolog (Fibonacci, Division por Restas y Potencia por Sumas/Multiplicacion)](Unidad_2/Ejercicios_Prolog.md)
+
 
