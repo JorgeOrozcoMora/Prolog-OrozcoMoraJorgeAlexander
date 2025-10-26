@@ -3,6 +3,7 @@
 *NC: 22120703*
 
 ---
+
 - Ejercicio 1: Cabeza y cola de una lista
 	~~~
 	% ejemplo: cabeza_y_cola([a,b,c,d], C, T).

@@ -182,5 +182,12 @@ Si no, se conserva la cabeza y se aplica recursivamente al resto.
 	intercalar([], L, L).
 	intercalar(L, [], L).
 	intercalar([X|R1], [Y|R2], [X,Y|R]) :- intercalar(R1, R2, R).
+	
+	Call: (12) intercalar([1, 2], [3, 4], _119740) ? creep
+    Call: (13) intercalar([2], [4], _121122) ? creep
+    Call: (14) intercalar([], [], _121948) ? creep
+    Exit: (14) intercalar([], [], []) ? creep
+    Exit: (13) intercalar([2], [4], [2, 4]) ? creep
+    Exit: (12) intercalar([1, 2], [3, 4], [1, 3, 2, 4]) ? creep
 	~~~
 	**Explicacion del Codigo:** Si una lista está vacía, el resultado es la otra lista. Si ambas listas tienen elementos, se toman las cabezas de ambas y se colocan alternadas en la lista resultado, aplicando recursión al resto de las listas.

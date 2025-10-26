@@ -22,6 +22,7 @@ Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y 
 [Ejercicios Logica de Primer Orden](Unidad_2/Logica_Primer_Orden.md)  
 [Evaluacion Prolog](Unidad_2/Evaluacion_Prolog.md)  
 [Ejercicios Prolog (Fibonacci, Division por Restas y Potencia por Sumas/Multiplicacion)](Unidad_2/Ejercicios_Prolog.md)  
-[Listas Prolog](Unidad_2/Listas_Prolog.md)
-
+[Listas Prolog](Unidad_2/Listas_Prolog.md)  
+[Pruebas de Escritorio](Unidad_2/Pruebas_de_Escritorio.md)  
+[Pruebas SME](Unidad_2/Pruebas_SME.md)
 
