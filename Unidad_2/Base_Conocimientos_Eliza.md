@@ -1,0 +1,90 @@
+# Base de Conocimientos Eliza
+**Orozco Mora Jorge Alexander**
+*NC: 22120703*
+
+---
+
+####  20 Interacciones de Bienvenida
+~~~
+template([que, tal, soy, s(_), '.'], ['Que', tal, 0, 'Como', estas, '?'], [3]).
+template([buenas, tardes, soy, s(_), '.'], ['Buenas', 'tardes', 0, 'Como', te, va, '?'], [3]).
+template([buenas, noches, soy, s(_), '.'], ['Buenas', 'noches', 0, 'Como', estas, '?'], [3]).
+template([mucho, gusto, soy, s(_), '.'], ['Mucho', gusto, 0, '!'], [3]).
+template([me, llamo, s(_), '.'], ['Hola', 0, 'Como', estas, '?'], [2]).
+template([hola, me, llamo, s(_), '.'], ['Hola', 0, 'Un', gusto, conocerte, '!'], [3]).
+template([encantado, soy, s(_), '.'], ['Encantado', 0, '!'], [2]).
+template([hey, soy, s(_), '.'], ['Hey', 0, 'Como', estas, '?'], [2]).
+template([saludos, soy, s(_), '.'], ['Saludos', 0, 'Como', te, encuentras, '?'], [2]).
+template([que, onda, soy, s(_), '.'], ['Que', onda, 0, 'Como', estas, '?'], [3]).
+template([un, placer, soy, s(_), '.'], ['El', placer, es, mio, 0, '!'], [3]).
+template([hola, aqui, s(_), '.'], ['Hola', 0, 'Como', te, va, '?'], [2]).
+template([buenas, soy, s(_), '.'], ['Buenas', 0, 'Como', estas, '?'], [2]).
+template([mucho, gusto, me, llamo, s(_), '.'], ['Mucho', gusto, 0, '!'], [4]).
+template([hola, que, tal, soy, s(_), '.'], ['Hola', 0, 'Como', te, encuentras, '?'], [4]).
+template([hey, que, tal, soy, s(_), '.'], ['Hey', 0, 'Como', va, todo, '?'], [4]).
+template([hola, por, aqui, s(_), '.'], ['Hola', 0, 'Como', estas, '?'], [3]).
+template([buen, dia, soy, s(_), '.'], ['Buen', dia, 0, 'Como', te, va, '?'], [3]).
+template([hola, gusto, en, saludarte, soy, s(_), '.'], ['Hola', 0, 'El', gusto, es, mio, '!'], [5]).
+template([me, presento, soy, s(_), '.'], ['Mucho', gusto, 0, '!'], [2]).
+~~~
+
+
+####  Interacciones a ¿Como Estas?
+~~~
+template([como, estas, '?'], ['Estoy', bien, 'gracias', 'por', preguntar, '!'], []).
+template([como, te, encuentras, '?'], ['Me', siento, muy, bien, 'y', tu, '?'], []).
+template([que, tal, estas, '?'], ['Todo', bien, 'solo', 'un', 'poco', ocupado, 'pero', feliz, '!'], []).
+template([como, va, todo, '?'], ['Va', muy, bien, 'gracias', '!'], []).
+template([como, te, va, '?'], ['Todo', marcha, genial, '!'], []).
+template([que, tal, te, va, '?'], ['Muy', bien, 'gracias', 'por', preguntar, '!'], []).
+template([como, andas, '?'], ['Ando', bien, 'y', 'con', buena, energia, '!'], []).
+template([todo, bien, '?'], ['Si', 'todo', muy, bien, 'gracias', '!'], []).
+template([que, tal, tu, dia, '?'], ['Muy', bien, 'mi', dia, 'va', excelente, '!'], []).
+template([como, te, sientes, '?'], ['Me', siento, super, bien, 'y', motivado, '!'], []).
+template([todo, tranquilo, '?'], ['Si', 'todo', tranquilo, 'por', aqui, '!'], []).
+template([como, va, la, vida, '?'], ['Va', bastante, bien, 'no', me, quejo, '!'], []).
+template([que, onda, como, estas, '?'], ['Todo', chido, 'y', tu, '?'], []).
+template([que, tal, te, sientes, hoy, '?'], ['Hoy', me, siento, genial, 'con', buena, vibra, '!'], []).
+template([que, tal, tu, mañana, '?'], ['Muy', bien, 'gracias', 'disfrutando', el, dia, '!'], []).
+
+template([estoy, bien, gracias, '.'], ['Me', alegra, 'que', estes, bien, '!'], []).
+template([muy, bien, y, tu, '?'], ['Yo', tambien, muy, bien, gracias, '!'], []).
+template([todo, bien, '.'], ['Perfecto', 'me', da, gusto, '!'], []).
+template([bien, gracias, por, preguntar, '.'], ['Con', gusto, '!'], []).
+template([ando, bien, '.'], ['Que', bueno, '!'], []).
+template([todo, tranquilo, '.'], ['Excelente', '!'], []).
+template([un, poco, cansado, '.'], ['Animo', 'espero', que, descanses, '!'], []).
+template([muy, feliz, '.'], ['Eso', es, genial, '!'], []).
+template([bien, aqui, andamos, '.'], ['Me', parece, muy, bien, '!'], []).
+template([todo, chido, '.'], ['Que', buena, onda, '!'], []).
+template([mas, o, menos, '.'], ['Ojala', 'tu', dia, mejore, '!'], []).
+template([no, muy, bien, '.'], ['Lo', siento, 'espero', que, mejores, pronto, '.'], []).
+template([excelente, '.'], ['Wow', 'que', bueno, escuchar, '!'], []).
+template([bastante, bien, '.'], ['Me', alegra, saberlo, '!'], []).
+template([bien, gracias, '.'], ['De, nada, '!'], []).
+~~~
+
+
+####  20 Interacciones de Despedida
+~~~
+template([adios, me, voy, soy, s(_), '.'], ['Adios', 0, ', que', tengas, buen, dia, '!'], [4]).
+template([hasta, luego, me, llamo, s(_), '.'], ['Hasta', luego, 0, '!'], [4]).
+template([me, despido, soy, s(_), '.'], ['Hasta', luego, 0, '!'], [3]).
+template([nos, vemos, soy, s(_), '.'], ['Nos', vemos, 0, '!'], [3]). % se mantiene individual al usar "yo"
+template([hasta, la, proxima, soy, s(_), '.'], ['Hasta', la, proxima, 0, '!'], [4]).
+template([me, retiro, soy, s(_), '.'], ['Hasta', pronto, 0, '!'], [3]).
+template([buena, tarde, soy, s(_), '.'], ['Buena', tarde, 0, '!'], [3]).
+template([buen, dia, me, retiro, soy, s(_), '.'], ['Buen', dia, 0, '!'], [5]).
+template([hasta, despues, soy, s(_), '.'], ['Hasta', despues, 0, '!'], [3]).
+template([fue, un, placer, soy, s(_), '.'], ['Fue', un, placer, 0, '!'], [4]).
+template([me, despido, hasta, luego, soy, s(_), '.'], ['Hasta', luego, 0, '!'], [4]).
+template([hasta, la, siguiente, soy, s(_), '.'], ['Hasta', la, siguiente, 0, '!'], [4]).
+template([que, te, vaya, bien, soy, s(_), '.'], ['Que', te, vaya, bien, 0, '!'], [5]).
+template([nos, vemos, pronto, soy, s(_), '.'], ['Nos', vemos, pronto, 0, '!'], [4]).
+template([cuidate, soy, s(_), '.'], ['Cuidate', 0, '!'], [2]).
+template([hasta, luego, cuídate, soy, s(_), '.'], ['Hasta', luego, 0, ', cuidate', '!'], [3]).
+template([gracias, me, voy, soy, s(_), '.'], ['Gracias', 0, '!'], [4]).
+template([hasta, mañana, soy, s(_), '.'], ['Hasta', mañana, 0, '!'], [3]).
+template([que, tengas, buen, dia, soy, s(_), '.'], ['Que', tengas, buen, dia, 0, '!'], [5]).
+template([me, retiro, que, estés, bien, soy, s(_), '.'], ['Que', estes, bien, 0, '!'], [6]).
+~~~
