@@ -27,4 +27,6 @@ Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y 
 [Pruebas SME](Unidad_2/Pruebas_SME.md)  
 [Base de Conocimientos Eliza](Unidad_2/Base_Conocimientos_Eliza.md)  
 [Funciones Establecidas por Prolog](Unidad_2/Funciones_Establecidas_Prolog.md)  
+[Series Matematicas Mapcar](Unidad_2/Series_Matematicas_Mapcar.md)  
+[Predicados Definidos por Prolog](Unidad_2/Predicados_Definidos_Prolog.md)  
 
