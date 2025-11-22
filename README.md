@@ -32,4 +32,4 @@ Ejercicios 2 Preorden Parte 1 y 2 (Esta en Unidad1/Ejercicio2_Preorden_Parte1 y 
 [Predicados Definidos por Prolog](Unidad_2/Predicados_Definidos_Prolog.md)  
 
 ### Archivos
-[Sistema Experto Medico](Archivos/sistema_experto_medico.md)  
+[Sistema Experto Medico](Archivos/sistema_experto_medico.pl)  
