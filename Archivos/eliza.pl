@@ -87,6 +87,7 @@ template([hola, me, llamo, s(_), '.'], ['Hola', 0, 'Un', gusto, conocerte, '!'],
 template([hola, _], ['Hola', 'como', estas, tu, '?'], []).
 template([buendia, _], ['Buendia', 'Como', estas, tu, '?'], []).
 
+% Saludos
 template([me, llamo, s(_), '.'], ['Hola', 0, 'Como', estas, '?'], [2]).
 template([que, tal, por, aqui, s(_), '.'], ['Es', un, gusto, tenerte, por, aqui, 0], [4]).
 template([que, milagro, soy, s(_), '.'], ['¡Que', milagro, 0, '!', '¿Como', has, estado, '?'], [3]).
@@ -107,6 +108,7 @@ template([muy, buenas, soy, s(_), '.'], ['Muy', buenas, tengas, tu, tambien, 0],
 template([hello, soy, s(_), '.'], ['Hello', 0, 'nice', to, meet, you], [2]).
 template([que, gusto, me, llamo, s(_), '.'], ['¡Que', alegria, 0, '!', 'bienvenido', a, mi, sistema], [4]).
 
+% Despedidas
 template([adios, me, voy, soy, s(_), '.'], ['Adios', 0, 'Que', tengan, un, excelente, día], [4]).
 template([hasta, luego, me, llamo, s(_), '.'], ['Hasta', luego, 0, 'Cuidate', mucho], [4]).
 template([me, despido, soy, s(_), '.'], ['Nos', vemos, 0, 'Vuelve', pronto], [3]).
@@ -128,6 +130,7 @@ template([chao, soy, s(_), '.'], ['Chao', 0], [2]).
 template([ya, me, desconecto, soy, s(_), '.'], ['Entendido', 0, 'Desconexión', exitosa], [4]).
 template([me, marcho, por, hoy, soy, s(_), '.'], ['Hasta', mañana, 0], [5]).
 
+% Estados de Animo
 template([como, estas, '?'], ['Estoy', bien, 'gracias', 'por', preguntar, '!'], []).
 template([estoy, bien, gracias, '.'], ['Me', alegra, 'que', estes, bien, '!'], []).
 template([estoy, muy, feliz, '.'], ['Me', encanta, escuchar, eso, '¿A', qué, se, debe, tanta, alegría, '?'], []).
@@ -146,6 +149,7 @@ template([estoy, sorprendido, '.'], ['¿Qué', ha, pasado, para, que, estés, as
 template([me, siento, relajado, '.'], ['Qué', envidia, 'Disfruta', mucho, de, esa, paz], []).
 template([estoy, estresado, '.'], ['Tómate', un, momento, para, ti, 'El', estrés, no, ayuda, en, nada], []).
 
+% Sistema Experto Medico
 template([que, sintomas, tiene, la, s(_)], [flagSymptoms], [4]).
 template([cuales, son, los, sintomas, de, la, s(_)], [flagSymptoms], [6]).
 template([sintomas, de, s(_)], [flagSymptoms], [2]).
@@ -156,6 +160,7 @@ template([a, donde, debo, acudir, por, la, s(_)], [flagGoTo], [6]).
 template([cuales, enfermedades, son, de, riesgo, s(_)], [flagRisk], [5]).
 template([que, enfermedades, tienen, riesgo, s(_)], [flagRisk], [4]).
 
+% Arbol Familiar
 template([quien, es, el, padre, de, s(_)], [flagFamily, padre], [5]).
 template([quien, es, la, madre, de, s(_)], [flagFamily, madre], [5]).
 template([quien, es, la, pareja, de, s(_)], [flagFamily, es_pareja], [5]).
@@ -172,6 +177,7 @@ template([cuantas, son, mujeres], [flagCount, mujer], []).
 template([cuantos, miembros, hay, en, la, familia], [flagCount, total], []).
 template([cuantos, s(_), tiene, s(_)], [flagCountKinship], [1, 3]). 
 
+% Arbol Tematico (Demon Slayer)
 template([cuantos, son, pilares, actuales], [flagDS, count_pilares_actuales], []).
 template([cuantos, son, ex, pilares], [flagDS, count_expilares], []).
 template([quienes, son, los, pilares, actuales], [flagDS, actuales_pilares], []).
@@ -195,6 +201,7 @@ template([quienes, son, todos, los, demonios], [flagDS, todos_demonios], []).
 template([menciona, a, los, cazadores, de, demonios], [flagDS, todos_cazadores], []).
 template([lista, a, los, civiles], [flagDS, lista_civiles], []).
 
+% Personalidad y Gustos
 template([te, gusta, la, s(_), _], [flagLike], [3]).
 template([te, gusta, el, s(_), _], [flagLike], [3]).
 template([tu, eres, s(_), _], [flagDo], [2]).
@@ -248,33 +255,41 @@ contar_coincidencias([E|Tail], [Count-E|T]) :-
     delete(Tail, E, Limpio),
     contar_coincidencias(Limpio, T).
 
+% Obtiene y construye una respuesta con los síntomas de una enfermedad conocida, sino responde no es una enfermedad conocida
 elizaSymptoms(Enf, R) :- enfermedad(Enf), findall(S, sintomade(S, Enf), L), (L \= [] -> list_to_sentence(L, Sent), R = ['Los', sintomas, de, Enf, son, Sent] ; R = ['No', info, de, sintomas, de, Enf]).
 elizaSymptoms(Enf, R) :- \+enfermedad(Enf), R = [Enf, 'no', es, una, enfermedad, conocida].
 
+% Devuelve la medicina asociada a una enfermedad registrada, sino responde que no hay información
 elizaMedicine(Enf, R) :- enfermedad(Enf), findall(M, medicinade(M, Enf), L), (L \= [] -> list_to_sentence(L, S), R = ['La', medicina, para, Enf, es, S] ; R = ['No', info, de, medicina, de, Enf]).
 elizaMedicine(Enf, R) :- \+enfermedad(Enf), R = [Enf, desconocida].
 
+% Obtiene el especialista adecuado para tratar una enfermedad conocida, sino responde que no hay información
 elizaSpecialist(Enf, R) :- enfermedad(Enf), findall(E, especialistade(E, Enf), L), (L \= [] -> list_to_sentence(L, S), R = ['El', especialista, es, S] ; R = ['No', info, de, especialista]).
 elizaSpecialist(Enf, R) :- \+enfermedad(Enf), R = [Enf, desconocida].
 
+% Indica el lugar al que se debe acudir para atender una enfermedad
 elizaGoTo(Enf, R) :- (acudir(Enf, Lugar) -> R = ['Acuda', a, Lugar, por, Enf] ; R = ['No', se, donde, ir]).
 
+% Lista las enfermedades asociadas a un nivel de riesgo específico
 elizaRiskList(Nivel, R) :- findall(E, riesgode(Nivel, E), L), (L \= [] -> list_to_sentence(L, S), R = ['Las', enfermedades, de, riesgo, Nivel, son, ':', S] ; R = ['No', tengo, registradas, enfermedades, con, riesgo, Nivel]).
 
 % ==================================================================
 %                         LOGICA ARBOL FAMILIAR
 % ==================================================================
+% Verifica que la persona exista en la base de datos (hombre o mujer)
 get_and_format_kinship(Person, Type, R) :-
     (hombre(Person); mujer(Person)) -> (
         findall(Kin, call_family_logic(Type, Kin, Person), List),
         (List = [] -> R = ['No', encontre, Type, de, Person] ; list_to_sentence(List, Sent), obtener_etiqueta(Type, Et), R = [Et, de, Person, son, ':', Sent])
     ) ; R = [Person, no, esta, en, mi, base, de, datos].
 
+% Etiquetas de texto para cada tipo de parentesco
 obtener_etiqueta(padre, 'El padre'). obtener_etiqueta(madre, 'La madre'). obtener_etiqueta(es_pareja, 'La pareja').
 obtener_etiqueta(hermanos, 'Los hermanos'). obtener_etiqueta(primos, 'Los primos'). obtener_etiqueta(abuelo_total, 'Los abuelos').
 obtener_etiqueta(tio_total, 'Los tios'). obtener_etiqueta(sobrino_total, 'Los sobrinos').
 obtener_etiqueta(hijos, 'Los hijos'). obtener_etiqueta(nietos, 'Los nietos'). obtener_etiqueta(padres_total, 'Los padres').
 
+% Lógica que decide qué predicado familiar consultar
 call_family_logic(padre, K, P) :- padre(K, P).
 call_family_logic(madre, K, P) :- madre(K, P).
 call_family_logic(es_pareja, K, P) :- es_pareja(K, P).
@@ -287,6 +302,7 @@ call_family_logic(hijos, K, P) :- hijo(K, P).
 call_family_logic(nietos, K, P) :- (nieto(K, P); nieta(P, K)). 
 call_family_logic(padres_total, K, P) :- (padre(K, P); madre(K, P)).
 
+% Conteo de miembros de la familia por género
 elizaCount(hombre, R) :- findall(H, hombre(H), L), length(L, N), R = ['Hay', N, miembros, que, son, hombres, en, la, familia].
 elizaCount(mujer, R) :- findall(M, mujer(M), L), length(L, N), R = ['Hay', N, miembros, que, son, mujeres, en, la, familia].
 elizaCount(total, R) :- 
@@ -295,6 +311,7 @@ elizaCount(total, R) :-
     Total is N1 + N2,
     R = ['En', total, ',', hay, Total, miembros, en, la, familia].
 
+% Cuenta cuántos familiares de un tipo específico tiene una persona
 elizaCountKinship(Type, Person, R) :-
     ( Type == primos -> InternalType = primos
     ; Type == tios -> InternalType = tio_total
@@ -313,27 +330,36 @@ elizaCountKinship(Type, Person, R) :-
 % ==================================================================
 %                         LOGICA ARBOL TEMATICO
 % ==================================================================
-ds_logic(que_es, _, R) :- R = ['Demon', slayer, ',', conocido, en, japón, como, kimetsu, no, yaiba, ',', es, una, serie, de, manga, y, anime, que, sigue, a, tanjiro, kamado, en, su, viaje, para, vengar, a, su, familia, y, curar, a, su, hermana, nezuko, de, una, maldición, demoníaca].
+% Lista todos los pilares actuales y ex pilares registrados
 ds_logic(actuales_pilares, _, R) :- findall(P, pilar(P, _), Lista), list_to_sentence(Lista, Sent), R = ['Los', pilares, actuales, son, ':', Sent].
 ds_logic(todos_expilares, _, R) :- findall(P, pilar_ex(P, _), Lista), list_to_sentence(Lista, Sent), R = ['Los', ex, pilares, registrados, son, ':', Sent].
+
+% Cuenta cuántos pilares actuales existen
 ds_logic(count_pilares_actuales, _, R) :- findall(P, pilar(P, _), L), length(L, N), R = ['Hay', N, personajes, que, son, pilares, actuales].
 ds_logic(count_expilares, _, R) :- findall(P, pilar_ex(P, _), L), length(L, N), R = ['Hay', N, ex, pilares, en, mis, registros].
 
-ds_logic(lunas_sup, _, R) :- findall(L, luna_superior(L, _), Lista), list_to_sentence(Lista, Sent), R = ['Las', lunas, superiores, son, ':', Sent].
+% Indica qué personajes usan un tipo específico de respiración o quién es el pilar de una respiración dada
 ds_logic(respiracion, Tipo, R) :- findall(P, usa_respiracion(P, Tipo), Lista), (Lista \= [] -> list_to_sentence(Lista, Sent), R = ['Los', que, usan, la, respiracion, de, Tipo, son, ':', Sent] ; R = ['Nadie', parece, usar, esa, respiracion]).
 ds_logic(pilar_de, Tipo, R) :- (pilar(Nombre, Tipo) -> R = ['El', pilar, de, la, respiracion, de, Tipo, es, Nombre] ; R = ['No', hay, un, pilar, de, Tipo]).
+
+% Lista todos los pilares actuales y ex pilares, lunas superiores e inferiores, miembros de la familia Ubuyashiki y demonios registrados
 ds_logic(todos_pilares, _, R) :- findall(P, (pilar(P, _); pilar_ex(P, _)), Lista), list_to_sentence(Lista, Sent), R = ['Los', pilares, totales, '(', actuales, y, ex, ')', son, ':', Sent].
+ds_logic(lunas_sup, _, R) :- findall(L, luna_superior(L, _), Lista), list_to_sentence(Lista, Sent), R = ['Las', lunas, superiores, son, ':', Sent].
 ds_logic(lunas_inf, _, R) :- findall(L, luna_inferior(L, _), Lista), list_to_sentence(Lista, Sent), R = ['Las', lunas, inferiores, son, ':', Sent].
 ds_logic(ubuyashiki, _, R) :- findall(F, familia_ubuyashiki(F), Lista), list_to_sentence(Lista, Sent), R = ['La', familia, ubuyashiki, ':', Sent].
 ds_logic(todos_demonios, _, R) :- findall(D, (luna_superior(D, _); luna_inferior(D, _); solitario(D)), Lista), list_to_sentence(Lista, Sent), R = ['Los', demonios, registrados, son, ':', Sent].
 ds_logic(todos_cazadores, _, R) :- findall(C, (pilar(C, _); pilar_ex(C, _); cazador_estandar(C, _)), Lista), list_to_sentence(Lista, Sent), R = ['Los', cazadores, son, ':', Sent].
 ds_logic(lista_civiles, _, R) :- findall(C, civil(C), Lista), list_to_sentence(Lista, Sent), R = ['Los', civiles, son, ':', Sent].
+
+% Cuenta el total de personajes que son o fueron pilares, lunas superiores, lunas inferiores, demonios, miembros de la familia Ubuyashiki y cazadores de demonios
 ds_logic(count_pilares, _, R) :- findall(P, (pilar(P, _); pilar_ex(P, _)), L), length(L, N), R = ['Hay', N, personajes, que, son, o, fueron, pilares].
 ds_logic(count_lunas_sup, _, R) :- findall(L, luna_superior(L, _), L2), length(L2, N), R = ['Hay', N, lunas, superiores].
 ds_logic(count_lunas_inf, _, R) :- findall(L, luna_inferior(L, _), L2), length(L2, N), R = ['Hay', N, lunas, inferiores].
 ds_logic(count_demonios, _, R) :- findall(D, (luna_superior(D, _); luna_inferior(D, _); solitario(D)), L), length(L, N), R = ['Hay', N, demonios, registrados].
 ds_logic(count_ubuyashiki, _, R) :- findall(F, familia_ubuyashiki(F), L), length(L, N), R = ['Hay', N, miembros, de, la, familia, ubuyashiki].
 ds_logic(count_cazadores, _, R) :- findall(C, (pilar(C, _); pilar_ex(C, _); cazador_estandar(C, _)), L), length(L, N), R = ['Hay', N, cazadores, de, demonios].
+
+% Busca una luna superior e inferior por su número
 ds_logic(busca_luna_sup, Num, R) :- findall(N, luna_superior(N, Num), L), (L \= [] -> list_to_sentence(L, S), R = ['La', luna, superior, Num, es, ':', S] ; R = ['No', tengo, registro, de, la, luna, superior, Num]).
 ds_logic(busca_luna_inf, Num, R) :- findall(N, luna_inferior(N, Num), L), (L \= [] -> list_to_sentence(L, S), R = ['La', luna, inferior, Num, es, ':', S] ; R = ['No', tengo, registro, de, la, luna, inferior, Num]).
 

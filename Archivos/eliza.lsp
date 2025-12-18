@@ -51,26 +51,38 @@
 ;;                       LÓGICA ARBOL FAMILIAR
 ;; ==================================================================
 
+;; Verifica si una persona pertenece a un género específico
 (defun es-genero (persona genero) (member persona (second (assoc genero *familia-genero*))))
+
+;; Obtiene la lista de padres de un hijo
 (defun obtener-padres (hijo) (cdr (assoc hijo (second (assoc 'hijos *familia-relaciones*)))))
+
+;; Obtiene la pareja de una persona, si existe
 (defun obtener-pareja (persona)
   (let ((parejas (second (assoc 'parejas *familia-relaciones*))))
     (car (remove-if-not (lambda (p) (member persona p)) parejas))))
-    ;; Compara de los padres de una persona y de otra son los mismos
+
+;; Determina si dos personas son hermanos
 (defun son-hermanos (a b)
   (let ((padres-a (obtener-padres a)) (padres-b (obtener-padres b)))
     (and (not (eq a b)) padres-a padres-b (equal padres-a padres-b))))
+
+;; Obtiene todos los hijos de una persona
 (defun obtener-hijos (persona)
   (let ((todas-relaciones (second (assoc 'hijos *familia-relaciones*))))
     (mapcar #'car (remove-if-not (lambda (rel) (member persona (cdr rel))) todas-relaciones))))
-    ;; Primero se obtiene a los padres y luego a los padres de los padres
+
+;; Obtiene los abuelos de una persona
 (defun obtener-abuelos (persona)
   (let ((padres (obtener-padres persona)))
     (reduce #'append (mapcar #'obtener-padres padres))))
-    ;; Primero obtiene los hijos de los abuelos y luego a los hijos de los hijos
+    
+;; Obtiene los nietos de una persona
 (defun obtener-nietos (persona)
   (let ((hijos (obtener-hijos persona)))
     (reduce #'append (mapcar #'obtener-hijos hijos))))
+
+;; Obtiene los tíos de una persona
 (defun obtener-tios (persona)
   (let* ((padres (obtener-padres persona))
          (abuelos (obtener-abuelos persona))
@@ -82,6 +94,8 @@
      (remove-if (lambda (t-bio) (member t-bio padres)) 
                 (append hijos-abuelos 
                         (mapcar (lambda (x) (car (remove x (obtener-pareja x)))) hijos-abuelos))))))
+
+;; Obtiene los primos de una persona
 (defun obtener-primos (persona)
   (let* ((tios (obtener-tios persona))
          (padres (obtener-padres persona))
@@ -90,6 +104,8 @@
                                                             (second (assoc 'hijos *familia-relaciones*)))))
                                              tios))))
     (remove-duplicates (remove-if (lambda (x) (or (eq x persona) (member x padres) (member x tios))) primos-potenciales))))
+    
+;; Obtiene los sobrinos de una persona
 (defun obtener-sobrinos (persona)
   (let* ((hermanos (let ((all-hijos (mapcar #'car (second (assoc 'hijos *familia-relaciones*)))))
                     (remove-if-not (lambda (x) (son-hermanos x persona)) all-hijos)))
@@ -98,11 +114,17 @@
                                         (second (assoc 'hijos *familia-relaciones*)))))
                                  hermanos))))
     (remove-duplicates (remove-if (lambda (x) (member x hermanos)) sobrinos-potenciales))))
+
+;; Cuenta cuántas personas hay registradas por género
 (defun contar-por-genero (genero) (length (second (assoc genero *familia-genero*))))
+
+;; Cuenta el total de miembros de la familia
 (defun contar-total-familia ()
   (let ((hombres (length (second (assoc 'hombre *familia-genero*))))
         (mujeres (length (second (assoc 'mujer *familia-genero*)))))
     (+ hombres mujeres)))
+
+;; Cuenta cuántos parientes de un tipo específico tiene una persona
 (defun contar-parientes (tipo persona)
   (length (case tipo
             (primos (obtener-primos persona))
@@ -118,12 +140,14 @@
 ;;       LÓGICA SISTEMA MEDICO, ARBOL FAMILIAR Y ARBOL TEMATICO
 ;; ==================================================================
 
+;; Obtiene las enfermedades registradas según su nivel de riesgo
 (defun obtener-enfermedades-por-riesgo (nivel)
   (let ((encontradas (remove-if-not (lambda (e) (eq (getf (cdr e) :r) nivel)) *enfermedades*)))
     (if encontradas
         (append (list "Las" "enfermedades" "de" "riesgo" nivel "son" ":") (mapcar #'car encontradas))
         (list "No" "tengo" "registradas" "enfermedades" "con" "riesgo" nivel))))
 
+;; Diagnostica enfermedades a partir de síntomas ingresados
 (defun diagnosticar-por-sintomas (sintomas-usuario)
   (let* ((limpios (remove nil sintomas-usuario))
          (conteo-total-sintomas 
@@ -142,7 +166,7 @@
                (datos (cdr exclusivo-encontrado)))
           (list "Parece que tienes" nombre "," "riesgo" (getf datos :r) "," "medicina" (getf datos :m) "," "especialista" (getf datos :e) "," "acudir" (getf datos :l)))
         
-        ;; 2. LÓGICA DE COINCIDENCIAS (Solo mostrar las de mayor puntaje)
+        ;; 2. LÓGICA DE COINCIDENCIAS
         (let ((resultados nil)
               (max-coincidencias 0))
           (dolist (e *enfermedades*)
@@ -164,6 +188,7 @@
               (t (append (list "Coinciden" "las" "siguientes" "enfermedades" "con" max-coincidencias "sintomas:")
                          (mapcar #'caar mejores-opciones)))))))))
 
+;; Maneja consultas médicas generales
 (defun handle-medical (flag arg)
   (if (eq flag 'flagDiagnosis)
       (diagnosticar-por-sintomas arg)
@@ -178,6 +203,7 @@
               (flagRisk (list "El" "riesgo" "de" arg "es" (getf (cdr data) :r)))
               (flagRiskGroup (obtener-enfermedades-por-riesgo arg)))))))
 
+;; Maneja consultas de Demon Slayer
 (defun handle-ds (type arg)
   (case type
     (todos_pilares (append (list "Los" "pilares" "actuales" "son" ":") (second (assoc 'pilares *ds-data*))))
@@ -216,6 +242,7 @@
                 (if found (list "El" "pilar" "de" arg "es" (second found)) (list "No" "hay" "pilar" "de" arg))))
     (t (list "Informacion" "no" "disponible"))))
 
+;; Maneja consultas del Arbol Familiar
 (defun handle-family (type person)
   (case type
     (count (let ((genero (cond ((member person '(hombres hombre)) 'hombre)
@@ -372,7 +399,7 @@
     ((quien es el protagonista) ("El" "protagonista" "es" "Tanjiro" "Kamado") nil)
     ((quien es el rey de los demonios) ("El" "rey" "es" "Muzan" "Kibutsuji") nil)
 
-    ;; --- PERSONALIDAD ---
+    ;; --- PERSONALIDAD Y GUSTOS ---
     ((te gusta la (s)) (flagLike) (3))
     ((te gusta el (s)) (flagLike) (3))
     ((tu eres (s)) (flagDo) (2))
